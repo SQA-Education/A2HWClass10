@@ -65,7 +65,7 @@ textarea{min-height:130px;resize:vertical} input[type="text"]:focus,select:focus
 </div>
 <script>
 const SESSION='10';
-let name='',scores={l:0,v:0,w:0,s:0,g:0},writingText='',spokenText='';
+let name='',scores={l:0,v:0,w:0,s:0,g:0},writingText='',spokenText='';try{window.scores=(typeof scores!=='undefined'?scores:(typeof sc!=='undefined'?sc:null));}catch(e){}
 let selectedWord=null,isRec=false,recTime=0,recTimer=null,recognition=null;
 let readingAnswers=[],grammarAnswers=[];
 const readingQBank=[{"q": "Where is Anna sitting?", "opts": ["In the doctor\u2019s office", "At school", "At the park"], "correct": 0}, {"q": "What is Anna doing?", "opts": ["Coughing and sneezing", "Running and jumping", "Cooking dinner"], "correct": 0}, {"q": "What is the nurse checking?", "opts": ["Her homework", "Her temperature", "Her bag"], "correct": 1}, {"q": "What is the doctor writing?", "opts": ["A letter", "A book", "A prescription"], "correct": 2}, {"q": "Why is Anna not working today?", "opts": ["She is on vacation", "She is feeling sick", "She is studying"], "correct": 1}];
@@ -372,7 +372,7 @@ try{
     document.body.appendChild(bar);
     document.getElementById('sqa-fresh').onclick=function(){localStorage.removeItem(KEY);bar.remove();};
     document.getElementById('sqa-resume').onclick=function(){try{
-      for(var k in st.g){try{window[k]=st.g[k];}catch(e){}}
+      for(var k in st.g){try{if(window[k]&&typeof window[k]==='object'&&st.g[k]&&typeof st.g[k]==='object'&&!Array.isArray(window[k])){for(var kk in st.g[k])window[k][kk]=st.g[k][kk];}else{window[k]=st.g[k];}}catch(e){}}
       for(var id in st.h){var el=document.getElementById(id);if(el)el.innerHTML=st.h[id];}
       var fs=fields();(st.f||[]).forEach(function(v,i){if(fs[i]!==undefined){try{fs[i].value=v;}catch(e){}}});
       var wc=document.getElementById('wc'),wr=document.getElementById('writing');if(wc&&wr)try{wc.textContent=wr.value.trim().split(/\s+/).filter(Boolean).length;}catch(e){}
